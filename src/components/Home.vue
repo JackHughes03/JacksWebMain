@@ -170,7 +170,7 @@ onMounted(() => {
                         <h3 class="subtitle">Pricing</h3>
                         
                         <h2 class="title">How how much will it cost?</h2>
-                        <p class="text">My pricing depends on the a variety of factors such as the size of the website, the complexity of the website and the time it takes to build the website.<br><br>
+                        <p class="text">My pricing depends on a variety of factors such as the size of the website, the complexity of the website and the time it takes to build the website.<br><br>
                             The good thing about only me building your website is I get to to choose the prices, and I like to choose fair. I understand times are tough, but starting a website is important and not all of us can afford a big company.<br><br>
                             Instead of it costing £1000+ with many strings attached, my pricing will be NO where near that.
                         </p>
