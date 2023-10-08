@@ -252,8 +252,8 @@ onMounted(() => {
                     <img class="opacity-0 duration-1000 pencilImage" src="../assets/images/pencil.png" alt="Image of a pencil" title="Image of a pencil">
                     
                     <div class="pt-10">
-                        <h2 class="md:text-5xl text-3xl text-white pencilTitle opacity-0 duration-1000">But why choose me...</h2>
-                        <p class="md:text-lg text-md mt-2 text-white pencilSubTitle opacity-0 duration-1000">I get it, there are many other website companies around, let me do our best to convince you to pick me...</p>
+                        <h2 class="md:text-5xl text-3xl text-white pencilTitle opacity-0 duration-1000">But why choose me?</h2>
+                        <p class="md:text-lg text-md mt-2 text-white pencilSubTitle opacity-0 duration-1000">I get it, there are many other website companies around. Let me do my best to convince you to pick me...</p>
                         
                         <ul class="list-disc md:ml-10 ml-2 mt-12 md:text-lg text-sm text-customgreen pencilList opacity-0 duration-1000">
                             <li class="mt-1 text-md">It is just me, Jack. Take comfort in knowing you won't have to dabble in large company issues.</li>
