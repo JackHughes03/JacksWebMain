@@ -156,7 +156,7 @@ onMounted(() => {
                         <img class="gridImage" src="../assets/icons/content.png" alt="Smaller image to represent the content slide" title="Smaller image to represent the content slide">
                         <h3 class="subtitle">Content</h3>
                         
-                        <h2 class="title">What content is your site made up of?</h2>
+                        <h2 class="title">What content would be on your site?</h2>
                         <p class="text">The content that makes up your website, you get to choose. I work closely alongside you to ensure your website has the best content possible.<br><br>
                             I will ask you a series of questions, either on a call or over email (whichever you prefer), to get a good understanding of what you want your website to look like.<br><br>
                             I will then create a design of your website and send it over to you for approval. If you're happy with it, then I will start coding it. If you're not happy with it, then I will make the necessary changes until you are happy.<br><br>
@@ -306,7 +306,7 @@ onMounted(() => {
                                 <ul class="list-disc">
                                     <li>My name is Jack</li>
                                     <li>I am 20 years old</li>
-                                    <li>Coding is my passion and i have spent the past 4 years building and perfecting my skills</li>
+                                    <li>Coding is my passion and I have spent the past 4 years building and perfecting my skills</li>
                                     <li>I love music and guitar and studied at a music college for 2 years</li>
                                 </ul>
                             </div>
