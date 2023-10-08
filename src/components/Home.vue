@@ -117,7 +117,7 @@ onMounted(() => {
                 </a>
             </section>
             
-            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row md:p-20 md:pb-10 bottom-0 mt-10 w-full flex flex-col justify-center pb-20 items-center backdrop-blur-sm p-0 bg-[#111111ac] section1">
+            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row md:p-20 md:pb-10 bottom-0 mt-10 w-full flex flex-col justify-center pb-2 items-center backdrop-blur-sm p-0 bg-[#111111ac] section1">
                 
                 <section class="flex md:flex-col flex-wrap md:w-[250px] pb-10 md:pb-0 p-10 md:p-0 items-center justify-center duration-200 gap-2 md:gap-0 slidesContainer">
                     <div @click="() => slidesClick(0)" class="slide0 slide md:w-[70%]">
