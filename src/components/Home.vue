@@ -180,7 +180,7 @@ onMounted(() => {
                         <img class="gridImage" src="../assets/icons/code.png" alt="Smaller image to represent the code slide" title="Smaller image to represent the code slide">
                         <h3 class="subtitle">Code</h3>
                         
-                        <h2 class="title">Lets learn a bit about the code I use.</h2>
+                        <h2 class="title">Let's learn a bit about the code I use.</h2>
                         <p class="text">I use the most modern coding languages and frameworks to ensure it is as fast and efficient as possible.<br><br>
                             I explained about the technologies I use when coding your websites but lets explore more about what that involves.<br><br>
                             For anyone that knows about website code, you're probably most familiar with HTML, CSS and JavaScript. These are the core languages that make up any website.<br><br>
@@ -192,7 +192,7 @@ onMounted(() => {
                         <img class="gridImage" src="../assets/icons/tech.png" alt="Smaller image to represent the tech slide" title="Smaller image to represent the tech slide">
                         <h3 class="subtitle">Technologies</h3>
                         
-                        <h2 class="title">Technologies we use to build your website.</h2>
+                        <h2 class="title">Technologies I use to build your website.</h2>
                         <p class="text">Web technologies are constantly evolving and I am always keeping up to date with the latest technologies.<br><br>
                             Before building your website I evaluate everything you want and work out the best, fastest, and most secure way of coding your website.<br><br>
                             I will most definitely use Tailwind when coding your website. This is an industry standard and is a super fast way of styling your website.<br><br>
@@ -218,7 +218,7 @@ onMounted(() => {
                         <h3 class="subtitle">Performance</h3>
                         
                         <h2 class="title">Ultra-fast performance is key.</h2>
-                        <p class="text">We optimise your website performance for lighting-fast loading. We do this by optimising every possible aspect of your site.
+                        <p class="text">I optimise your website performance for lighting-fast loading. I do this by optimising every possible aspect of your site.
                         </p>
                     </div>
                     
@@ -227,7 +227,7 @@ onMounted(() => {
                         <h3 class="subtitle">Success</h3>
                         
                         <h2 class="title">I want success for your website.</h2>
-                        <p class="text">We work closely with you to define clear objectives and goals before the coding starts. This helps reduce the amount of time it takes to make, thus reducing the price.</p>
+                        <p class="text">I work closely with you to define clear objectives and goals before the coding starts. This helps reduce the amount of time it takes to make, thus reducing the price.</p>
                     </div>
                 </section>
             </section>
