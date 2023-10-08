@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import Vue from 'vue'; // Change to './vue' or '../vue' if needed
 const selectedSlideIndex = ref(0),
 showAbout = ref(false);
 
