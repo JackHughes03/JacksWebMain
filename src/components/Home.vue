@@ -104,7 +104,7 @@ onMounted(() => {
                 </div>
             </nav>
             
-            <section class="md:ml-10 ml-4 md:mt-32 mt-20 inline-block md:w-[60%] w-[95%]">
+            <section class="lg:ml-36 md:ml-10 ml-4 md:mt-32 mt-20 inline-block md:w-[60%] w-[95%] lg:scale-125 scale-100">
                 <h1 class="md:text-[30px] text-xl font-bold uppercase">Bring your ideas to life</h1>
                 <p class="mt-2 opacity-50 text-sm md:text-sm">Why settle for an average website when you have an exceptional idea?</p>
                 <p class="opacity-50 text-xs md:text-sm">Let me build you that <span class="headerWords">exceptional</span>, hand coded website <span class="headerWords">today</span>.</p>
@@ -117,9 +117,9 @@ onMounted(() => {
                 </a>
             </section>
             
-            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row md:p-20 md:pb-10 bottom-0 mt-10 w-full flex flex-col justify-center pb-2 items-center backdrop-blur-sm p-0 bg-[#111111ac] section1">
+            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row md:p-20 md:pb-20 bottom-0 mt-10 w-full flex flex-col justify-center pb-2 items-center backdrop-blur-sm p-0 bg-[#111111ac] section1">
                 
-                <section class="flex md:flex-col flex-wrap md:w-[250px] pb-10 md:pb-0 p-10 md:p-0 items-center justify-center duration-200 gap-2 md:gap-0 slidesContainer">
+                <section class="flex md:flex-col flex-wrap md:w-[250px] pb-0 md:pb-0 p-4 md:p-0 items-center justify-center duration-200 gap-2 md:gap-0 lg:scale-125 scale-100 slidesContainer">
                     <div @click="() => slidesClick(0)" class="slide0 slide md:w-[70%]">
                         <img class="slideimage" src="../assets/icons/content.png" alt="Image to represent the content slide" title="Image to represent the content slide">
                         <h2>Content</h2>
@@ -151,16 +151,16 @@ onMounted(() => {
                 </section>
                 
                 <p class="p-2 text-sm opacity-60">Scroll down to see all or click buttons!</p>
-                <section class="overflow-y-scroll overflow-x-hidden md:ml-20 gap-10 p-3 border-[1px] shadow-2xl max-h-[210px] rounded-lg bg-[#11111167] grid grid-Container justify-center">
+                <section class="overflow-y-scroll overflow-x-hidden md:ml-20 gap-10 p-3 border-[1px] shadow-2xl max-h-[210px] rounded-lg bg-[#11111167] grid grid-Container justify-center lg:scale-125 scale-100">
                     <div class="gridItem">
                         <img class="gridImage" src="../assets/icons/content.png" alt="Smaller image to represent the content slide" title="Smaller image to represent the content slide">
                         <h3 class="subtitle">Content</h3>
                         
                         <h2 class="title">What content would be on your site?</h2>
-                        <p class="text">The content that makes up your website, you get to choose. I work closely alongside you to ensure your website has the best content possible.<br><br>
-                            I will ask you a series of questions, either on a call or over email (whichever you prefer), to get a good understanding of what you want your website to look like.<br><br>
+                        <p class="text">The content comprising your website is entirely customisable to your preferences. I closely collaborate with you to guarantee the highest quality content for your website.<br><br>
+                            I will conduct a series of inquiries, either through a call or email, based on your preference, to gain a comprehensive understanding of your desired website aesthetics.<br><br>
                             I will then create a design of your website and send it over to you for approval. If you're happy with it, then I will start coding it. If you're not happy with it, then I will make the necessary changes until you are happy.<br><br>
-                            Once the website is coded, I will send it over to you for approval. If you're happy with it, then I will make it live. If you're not happy with it, then I will make the necessary changes until you are happy.<br><br>
+                            After the coding phase is complete, I will send it to you for your final approval. If you are satisfied, we will proceed to make it live. In case of any further adjustments needed, I am committed to making them until you are completely content.<br><br>
                             I make sure to stay well connected with you throughout the whole process to ensure you are happy with the website.<br><br>
                         </p>
                     </div>
@@ -170,9 +170,9 @@ onMounted(() => {
                         <h3 class="subtitle">Pricing</h3>
                         
                         <h2 class="title">How how much will it cost?</h2>
-                        <p class="text">My pricing depends on a variety of factors such as the size of the website, the complexity of the website and the time it takes to build the website.<br><br>
-                            The good thing about only me building your website is I get to to choose the prices, and I like to choose fair. I understand times are tough, but starting a website is important and not all of us can afford a big company.<br><br>
-                            Instead of it costing £1000+ with many strings attached, my pricing will be NO where near that.
+                        <p class="text">My pricing structure is determined by several key factors, including the size and complexity of the website, as well as the time required for its development.<br><br>
+                            One advantage of having me as the developer of your website is my commitment to fair and reasonable pricing. I understand the challenges many individuals face, particularly when embarking on the journey of establishing a website.<br><br>
+                            Instead of it costing £1000+ with many strings attached, my pricing will be much more fair.
                         </p>
                     </div>
                     
@@ -233,7 +233,7 @@ onMounted(() => {
             </section>
         </header>
         
-        <aside v-if="showAbout" class="absolute top-20 right-8 z-20 font-[system-ui] bg-[#77777737] backdrop-blur-sm text-white w-[350px] p-4 rounded-md border-[1px]">
+        <aside v-if="showAbout" class="absolute top-20 sm:right-8 z-20 font-[system-ui] bg-[#77777737] backdrop-blur-sm text-white p-4 rounded-md border-[1px] w-[95%] sm:w-[350px] max-h-[500px] overflow-y-scroll">
             <h2 class="font-semibold text-xl p-2 rounded">Information about this website.</h2>
             <ul class="list-disc ml-2">
                 <li class="informationtext">This website was fully hand coded by me (Jack) using <a href="https://vuejs.org/" target="_blank" class="underline font-bold">Vue JS</a> and <a href="https://tailwindcss.com/" target="_blank" class="underline font-bold">Tailwind</a>, accompanied by <a href="https://sass-lang.com/" target="_blank" class="underline font-bold">SCSS.</a></li>
@@ -249,9 +249,9 @@ onMounted(() => {
             <section class="w-full md:py-20 pb-10 flex items-center pl-2 section2" id="section2">
                 <div class="md:w-[80%] w-[95%] flex flex-row items-center justify-center md:gap-20 gap-10 mx-auto">
                     
-                    <img class="opacity-0 duration-1000 pencilImage" src="../assets/images/pencil.png" alt="Image of a pencil" title="Image of a pencil">
+                    <img class="opacity-0 duration-1000 scale-75 md:scale-100 pencilImage" src="../assets/images/pencil.png" alt="Image of a pencil" title="Image of a pencil">
                     
-                    <div class="pt-10">
+                    <div class="pt-10 -ml-6 -mt-6 md:ml-0 md:mt-0">
                         <h2 class="md:text-5xl text-3xl text-white pencilTitle opacity-0 duration-1000">But why choose me?</h2>
                         <p class="md:text-lg text-md mt-2 text-white pencilSubTitle opacity-0 duration-1000">I get it, there are many other website companies around. Let me do my best to convince you to pick me...</p>
                         
@@ -260,7 +260,7 @@ onMounted(() => {
                             <li class="mt-1 text-md">I always keeping up to date with the latest technologies.</li>
                             <li class="mt-1 text-md">I am a perfectionist and will make sure your website is perfect.</li>
                             <li class="mt-1 text-md">I am a very friendly and approachable person.</li>
-                            <li class="mt-1 text-md">I am very affordable and will work with you to find a price that suits you.</li>
+                            <li class="mt-1 text-md">I am very affordable and my prices are fair.</li>
                         </ul>
                     </div>
                 </div>
@@ -331,7 +331,20 @@ onMounted(() => {
                 </div>
             </section>
             
-            <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center">
+            <section class="lg:scale-125 scale-100 lg:pb-20 max-w-[80%] mx-auto">
+                <h2 class="md:text-2xl font-semibold mt-20 text-center md:px-10 text-md">How much will your website cost?</h2>
+                
+                <p class="mx-auto w-[85%] text-sm text-center opacity-70 mt-4">The big piece of information that everybody wants to know... how much will I have to spend?</p>
+                <p class="mx-auto w-[85%] text-sm text-center opacity-70">This is why I have a free consultation to give you a rough estimate of how much a website made by me will cost.</p>
+                <br>
+                
+                <p class="mx-auto w-[85%] text-sm text-center opacity-70">Usually a web developer would charge an hourly price, but how can you be sure they are being fair? That's why I will charge a total based on the content you would like. This makes it cheaper for you. Let's do the math:</p>
+                <ul class="mx-auto w-[85%] text-sm text-center opacity-70 list-disc">
+                    <li>Say a web developer charges £12/h and spends 2 weeks on a website, 4 hours a day. That would total £672, and that's before added fees.</li>
+                </ul>
+            </section>
+            
+            <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center lg:scale-125 scale-100">
                 <h2 class="md:text-2xl font-semibold mt-20 text-center md:px-10 text-md">Get in contact with me to discuss further!</h2>
                 <p class="opacity-60 text-[10px] md:text-[12px] text-center md:px-10">Please drop me an email, I would love to hear from you! 
                     <br>Ask any questions you like!
@@ -386,6 +399,10 @@ html {
             background-repeat: no-repeat;
             height: 100%;
             background-size: cover;
+            
+            @media (max-width: 767px) {
+                background-image: url('../assets/images/women-short.jpg');
+            }
             
             .headerWords {
                 @apply underline text-customgreen;
@@ -545,6 +562,8 @@ html {
     - add copyright for icons8 ✅
     - fix responsiveness on content slides ✅
     - buy domain ✅
+    - prepare tailwind and vue for release ✅
     
-    - prepare tailwind and vue for release 
+    - add in pricing section
+    - allow sections to be clicked back to normal
 -->
