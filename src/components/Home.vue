@@ -1,88 +1,88 @@
 <script setup>
-import { ref, onMounted } from 'vue';
-const selectedSlideIndex = ref(0),
-showAbout = ref(false);
-
-const isElementInViewport = (element) => {
-    const rect = element.getBoundingClientRect();
-    return (
-    rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-};
-
-const handleScroll = () => {
-    const pencilImage = document.querySelector('.pencilImage'),
-    pencilTitle = document.querySelector('.pencilTitle'),
-    pencilSubTitle = document.querySelector('.pencilSubTitle'),
-    pencilList = document.querySelector('.pencilList'),
-    qualificationGrid = document.querySelector('.qualificationGrid'),
-    gridItems = document.querySelectorAll('.gridItems'),
-    qualificationTitle = document.querySelector('.qualificationTitle'),
-    elementsToAnimate = [pencilImage, pencilTitle, pencilSubTitle, pencilList];
+    import { ref, onMounted } from 'vue';
+    const selectedSlideIndex = ref(0),
+    showAbout = ref(false);
     
-    elementsToAnimate.forEach((element) => {
-        if (isElementInViewport(element)) {
-            element.classList.replace('opacity-0', 'opacity-100');
-        }
-    });
+    const isElementInViewport = (element) => {
+        const rect = element.getBoundingClientRect();
+        return (
+        rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    };
     
-    if (isElementInViewport(qualificationGrid)) {
-        qualificationTitle.classList.replace('opacity-0', 'opacity-100');
+    const handleScroll = () => {
+        const pencilImage = document.querySelector('.pencilImage'),
+        pencilTitle = document.querySelector('.pencilTitle'),
+        pencilSubTitle = document.querySelector('.pencilSubTitle'),
+        pencilList = document.querySelector('.pencilList'),
+        qualificationGrid = document.querySelector('.qualificationGrid'),
+        gridItems = document.querySelectorAll('.gridItems'),
+        qualificationTitle = document.querySelector('.qualificationTitle'),
+        elementsToAnimate = [pencilImage, pencilTitle, pencilSubTitle, pencilList];
         
-        gridItems.forEach((item, i) => setTimeout(() => {
-            item.style.opacity = '1';
-            item.style.transition = 'opacity 0.5s';
-        }, i * 100));
+        elementsToAnimate.forEach((element) => {
+            if (isElementInViewport(element)) {
+                element.classList.replace('opacity-0', 'opacity-100');
+            }
+        });
+        
+        if (isElementInViewport(qualificationGrid)) {
+            qualificationTitle.classList.replace('opacity-0', 'opacity-100');
+            
+            gridItems.forEach((item, i) => setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transition = 'opacity 0.5s';
+            }, i * 100));
+        }
     }
-}
-
-const slidesClick = (index) => {
-    const slideToScroll = document.querySelector(`.slidecontent${index}`),
-    gridContainer = document.querySelector('.grid-Container');
     
-    selectedSlideIndex.value = index;
-    
-    gridContainer.scrollTo({
-        top: slideToScroll.offsetTop - 10,
-        behavior: 'smooth'
-    });
-}
-
-const qualificationClick = (index) => {
-    const griditems = document.querySelectorAll('.gridItems');
-    
-    griditems.forEach((item, i) => {
-        const title = item.querySelector('.title'),
-        content = item.querySelector('.content');
+    const slidesClick = (index) => {
+        const slideToScroll = document.querySelector(`.slidecontent${index}`),
+        gridContainer = document.querySelector('.grid-Container');
         
-        if (i === index) {
-            item.style.opacity = '1';
-            item.style.height = 'unset';
-            title.style.display = 'none';
-            content.style.display = 'block';
-        }
+        selectedSlideIndex.value = index;
+        
+        gridContainer.scrollTo({
+            top: slideToScroll.offsetTop - 10,
+            behavior: 'smooth'
+        });
+    }
+    
+    const qualificationClick = (index) => {
+        const griditems = document.querySelectorAll('.gridItems');
+        
+        griditems.forEach((item, i) => {
+            const title = item.querySelector('.title'),
+            content = item.querySelector('.content');
+            
+            if (i === index) {
+                item.style.opacity = '1';
+                item.style.height = 'unset';
+                title.style.display = 'none';
+                content.style.display = 'block';
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav'),
+        navButtons = document.querySelector('.navButtons');
+        
+        window.scrollY > 1 ? ( navButtons.classList.replace('gap-8', 'gap-2'), navButtons.classList.replace('mr-12', 'mr-6'), nav.classList.add('bg-[#111111bc]')) : ( navButtons.classList.replace('gap-2', 'gap-8'), navButtons.classList.replace('mr-6', 'mr-12'), nav.classList.remove('bg-[#111111bc]'));
     });
-}
-
-window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav'),
-    navButtons = document.querySelector('.navButtons');
     
-    window.scrollY > 1 ? ( navButtons.classList.replace('gap-8', 'gap-2'), navButtons.classList.replace('mr-12', 'mr-6'), nav.classList.add('bg-[#111111bc]')) : ( navButtons.classList.replace('gap-2', 'gap-8'), navButtons.classList.replace('mr-6', 'mr-12'), nav.classList.remove('bg-[#111111bc]'));
-});
-
-onMounted(() => {
-    const slides = document.querySelectorAll('.slide'),
-    slidecontent = document.querySelectorAll('.gridItem');
-    
-    slides.forEach((slide, i) => {
-        slidecontent[i].classList.add(`slidecontent${i}`);
+    onMounted(() => {
+        const slides = document.querySelectorAll('.slide'),
+        slidecontent = document.querySelectorAll('.gridItem');
+        
+        slides.forEach((slide, i) => {
+            slidecontent[i].classList.add(`slidecontent${i}`);
+        });
+        
+        window.addEventListener("scroll", handleScroll);
+        
+        handleScroll();
     });
-    
-    window.addEventListener("scroll", handleScroll);
-    
-    handleScroll();
-});
 </script>
 
 <template>
@@ -104,9 +104,9 @@ onMounted(() => {
                 </div>
             </nav>
             
-            <section class="lg:ml-36 md:ml-10 ml-4 md:mt-32 mt-20 inline-block md:w-[60%] w-[95%] lg:scale-125 scale-100">
-                <h1 class="md:text-[30px] text-xl font-bold uppercase">Bring your ideas to life</h1>
-                <p class="mt-2 opacity-50 text-sm md:text-sm">Why settle for an average website when you have an exceptional idea?</p>
+            <section class="md:ml-10 ml-4 md:mt-32 mt-20 inline-block md:w-[60%] w-[95%]">
+                <h1 class="lg:text-4xl md:text-[30px] text-xl font-bold uppercase">Bring your ideas to life</h1>
+                <p class="mt-2 opacity-50 text-sm lg:text-lg md:text-sm">Why settle for an average website when you have an exceptional idea?</p>
                 <p class="opacity-50 text-xs md:text-sm">Let me build you that <span class="headerWords">exceptional</span>, hand coded website <span class="headerWords">today</span>.</p>
                 
                 <a class="mr-4 startButtons" href="#ScrollToContact">Contact me
@@ -117,7 +117,7 @@ onMounted(() => {
                 </a>
             </section>
             
-            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row md:p-20 md:pb-20 bottom-0 mt-10 w-full flex flex-col justify-center pb-2 items-center backdrop-blur-sm p-0 bg-[#111111ac] section1">
+            <section id="ScrollToExpand" class="absolute md:mt-auto md:h-auto md:flex-row xl:flex-col md:p-20 md:pb-20 bottom-0 mt-10 w-full xl:w-[500px] xl:right-0 xl:h-full flex flex-col justify-center pb-2 items-center backdrop-blur-sm p-0 bg-[#111111ac] lg:gap-20 section1">
                 
                 <section class="flex md:flex-col flex-wrap md:w-[250px] pb-0 md:pb-0 p-4 md:p-0 items-center justify-center duration-200 gap-2 md:gap-0 lg:scale-125 scale-100 slidesContainer">
                     <div @click="() => slidesClick(0)" class="slide0 slide md:w-[70%]">
@@ -151,16 +151,16 @@ onMounted(() => {
                 </section>
                 
                 <p class="p-2 text-sm opacity-60">Scroll down to see all or click buttons!</p>
-                <section class="overflow-y-scroll overflow-x-hidden md:ml-20 gap-10 p-3 border-[1px] shadow-2xl max-h-[210px] rounded-lg bg-[#11111167] grid grid-Container justify-center lg:scale-125 scale-100">
+                <section class="overflow-y-scroll overflow-x-hidden md:ml-20 lg:ml-0 gap-10 p-3 border-[1px] shadow-2xl max-h-[210px] rounded-lg bg-[#11111167] grid grid-Container justify-center lg:scale-125 scale-100">
                     <div class="gridItem">
                         <img class="gridImage" src="../assets/icons/content.png" alt="Smaller image to represent the content slide" title="Smaller image to represent the content slide">
                         <h3 class="subtitle">Content</h3>
                         
                         <h2 class="title">What content would be on your site?</h2>
-                        <p class="text">The content comprising your website is entirely customisable to your preferences. I closely collaborate with you to guarantee the highest quality content for your website.<br><br>
-                            I will conduct a series of inquiries, either through a call or email, based on your preference, to gain a comprehensive understanding of your desired website aesthetics.<br><br>
+                        <p class="text">The content comprising your website is entirely customisable to your preferences. I closely work with you to guarantee the highest quality content for your website.<br><br>
+                            I will conduct a series of inquiries, either through phone, email or text, based on your preference, to gain a comprehensive understanding of your desired website aesthetics. I will also talk you through the process of how your website will be created.<br><br>
                             I will then create a design of your website and send it over to you for approval. If you're happy with it, then I will start coding it. If you're not happy with it, then I will make the necessary changes until you are happy.<br><br>
-                            After the coding phase is complete, I will send it to you for your final approval. If you are satisfied, we will proceed to make it live. In case of any further adjustments needed, I am committed to making them until you are completely content.<br><br>
+                            After the coding phase is complete, I will send it to you for your final approval. If you are satisfied, I will proceed to make it live. In case of any further adjustments needed, I am committed to making them until you are completely content.<br><br>
                             I make sure to stay well connected with you throughout the whole process to ensure you are happy with the website.<br><br>
                         </p>
                     </div>
@@ -172,7 +172,6 @@ onMounted(() => {
                         <h2 class="title">How how much will it cost?</h2>
                         <p class="text">My pricing structure is determined by several key factors, including the size and complexity of the website, as well as the time required for its development.<br><br>
                             One advantage of having me as the developer of your website is my commitment to fair and reasonable pricing. I understand the challenges many individuals face, particularly when embarking on the journey of establishing a website.<br><br>
-                            Instead of it costing £1000+ with many strings attached, my pricing will be much more fair.
                         </p>
                     </div>
                     
@@ -181,10 +180,9 @@ onMounted(() => {
                         <h3 class="subtitle">Code</h3>
                         
                         <h2 class="title">Let's learn a bit about the code I use.</h2>
-                        <p class="text">I use the most modern coding languages and frameworks to ensure it is as fast and efficient as possible.<br><br>
-                            I explained about the technologies I use when coding your websites but lets explore more about what that involves.<br><br>
+                        <p class="text">I use the most modern coding languages and frameworks to ensure your website is as fast and efficient as possible.<br><br>
                             For anyone that knows about website code, you're probably most familiar with HTML, CSS and JavaScript. These are the core languages that make up any website.<br><br>
-                            If you're a more advanced and experienced developer, the use of frameworks and libraries would be used to make the coding process faster and more efficient.<br><br>
+                            I have a lot of knowledge in these languages and know the best practices to ensure your website is as near to perfect as possible.<br><br>
                         </p>
                     </div>
                     
@@ -197,9 +195,8 @@ onMounted(() => {
                             Before building your website I evaluate everything you want and work out the best, fastest, and most secure way of coding your website.<br><br>
                             I will most definitely use Tailwind when coding your website. This is an industry standard and is a super fast way of styling your website.<br><br>
                             Depending on the circumstances, I will use Vue js. This is a modern JavaScript framework that allows me to build your website in a super fast and efficient way.<br><br>
-                            In the case in which a lot of CSS/Tailwind code is being used in separate style tags then I will use SCSS to keep the code as clean as possible.<br><br>
-                            Another industry standard is Git and Github. This is a version control system that allows me to keep track of all the changes I make to your website. This is super useful as it allows me to revert back to previous versions of your website if needed, and also makes sure I don't lose any code.<br><br>
-                            Of course, I will use HTML, CSS and JavaScript to build your website. These are the core languages that make up any website.
+                            In the case in which a lot of tailwind apply directive or regular css is being used, I will use SCSS to keep the code as clean as possible. This allows me to structure your code systematically.<br><br>
+                            Another industry standard is Git and Github. This is a version control system that allows me to keep track of all the changes I make to your website. This is super useful as it allows me to revert back to previous versions of your website if needed, and also makes sure I don't lose any code. I will also use this as a code uploader which will be linked to your domain, making it super easy and quick to edit code.<br><br>
                         </p>
                     </div>
                     
@@ -208,8 +205,8 @@ onMounted(() => {
                         <h3 class="subtitle">SEO</h3>
                         
                         <h2 class="title">Search Engine Optimisation is important.</h2>
-                        <p class="text">We make sure search engines understand your website and rank it highly. This means using the right keywords, optimising images, having a user friendly design, and making sure your site loads fast.<br><br>
-                            We also make sure your website is accessible to people with visual and hearing impairments by following industry standards.<br><br>
+                        <p class="text">I make sure search engines understand your website and rank it highly. This means using the right keywords, optimising images, having a user friendly design, and making sure your site loads fast.<br><br>
+                            I also make sure your website is accessible to people with visual and hearing impairments by following industry standards.<br><br>
                         </p>
                     </div>
                     
@@ -218,7 +215,7 @@ onMounted(() => {
                         <h3 class="subtitle">Performance</h3>
                         
                         <h2 class="title">Ultra-fast performance is key.</h2>
-                        <p class="text">I optimise your website performance for lighting-fast loading. I do this by optimising every possible aspect of your site.
+                        <p class="text">I optimise your website performance for lighting-fast loading. I do this by optimising every possible aspect of your site, including images, code, and more.<br><br>
                         </p>
                     </div>
                     
@@ -227,13 +224,13 @@ onMounted(() => {
                         <h3 class="subtitle">Success</h3>
                         
                         <h2 class="title">I want success for your website.</h2>
-                        <p class="text">I work closely with you to define clear objectives and goals before the coding starts. This helps reduce the amount of time it takes to make, thus reducing the price.</p>
+                        <p class="text">I work closely with you to define clear objectives and goals before the coding starts. This helps reduce the amount of time it takes to make, thus reducing the price and increasing the overall success.</p>
                     </div>
                 </section>
             </section>
         </header>
         
-        <aside v-if="showAbout" class="absolute top-20 sm:right-8 z-20 font-[system-ui] bg-[#77777737] backdrop-blur-sm text-white p-4 rounded-md border-[1px] w-[95%] sm:w-[350px] max-h-[500px] overflow-y-scroll">
+        <aside v-if="showAbout" class="absolute top-20 sm:right-8 z-20 font-[system-ui] bg-black backdrop-blur-sm text-white p-4 rounded-lg border-2 w-[95%] sm:w-[350px] max-h-[500px] overflow-y-scroll">
             <h2 class="font-semibold text-xl p-2 rounded">Information about this website.</h2>
             <ul class="list-disc ml-2">
                 <li class="informationtext">This website was fully hand coded by me (Jack) using <a href="https://vuejs.org/" target="_blank" class="underline font-bold">Vue JS</a> and <a href="https://tailwindcss.com/" target="_blank" class="underline font-bold">Tailwind</a>, accompanied by <a href="https://sass-lang.com/" target="_blank" class="underline font-bold">SCSS.</a></li>
@@ -241,116 +238,125 @@ onMounted(() => {
                 <li class="informationtext">This website is accessible to people with visual and hearing impairments by following industry standards.</li>
                 <li class="informationtext">This website is fully responsive and works on all devices.</li>
                 <li class="informationtext">This website is optmimised as best as possible to promote as quick as possible loading speeds.</li>
-                <li class="informationtext">If you're viewing on a big enough screen (it wont affect your experience if you aren't), then you may be curious as to why there is a random women as the background... Well, its aesthetic and is a nice, high quality picture!</li>
             </ul>
         </aside>
         
         <main class="text-white w-full">
-            <section class="w-full md:py-20 pb-10 flex items-center pl-2 section2" id="section2">
-                <div class="md:w-[80%] w-[95%] flex flex-row items-center justify-center md:gap-20 gap-10 mx-auto">
-                    
-                    <img class="opacity-0 duration-1000 scale-75 md:scale-100 pencilImage" src="../assets/images/pencil.png" alt="Image of a pencil" title="Image of a pencil">
-                    
-                    <div class="pt-10 -ml-6 -mt-6 md:ml-0 md:mt-0">
-                        <h2 class="md:text-5xl text-3xl text-white pencilTitle opacity-0 duration-1000">But why choose me?</h2>
-                        <p class="md:text-lg text-md mt-2 text-white pencilSubTitle opacity-0 duration-1000">I get it, there are many other website companies around. Let me do my best to convince you to pick me...</p>
+            <section class="block 2xl:grid grid-cols-2 twoGridSection">
+                <section class="w-full md:py-20 pb-10 flex items-center pl-2 section2" id="section2">
+                    <div class="md:w-[80%] w-[95%] flex flex-row items-center justify-center md:gap-20 gap-10 mx-auto">
                         
-                        <ul class="list-disc md:ml-10 ml-2 mt-12 md:text-lg text-sm text-customgreen pencilList opacity-0 duration-1000">
-                            <li class="mt-1 text-md">It is just me, Jack. Take comfort in knowing you won't have to dabble in large company issues.</li>
-                            <li class="mt-1 text-md">I always keeping up to date with the latest technologies.</li>
-                            <li class="mt-1 text-md">I am a perfectionist and will make sure your website is perfect.</li>
-                            <li class="mt-1 text-md">I am a very friendly and approachable person.</li>
-                            <li class="mt-1 text-md">I am very affordable and my prices are fair.</li>
-                        </ul>
+                        <img class="opacity-0 duration-1000 scale-75 md:scale-100 pencilImage" src="../assets/images/pencil.png" alt="Image of a pencil" title="Image of a pencil">
+                        
+                        <div class="pt-10 -ml-6 -mt-6 md:ml-0 md:mt-0">
+                            <h2 class="md:text-5xl text-3xl text-white pencilTitle opacity-0 duration-1000">But why choose me?</h2>
+                            <p class="md:text-lg text-md mt-2 text-white pencilSubTitle opacity-0 duration-1000">I get it, there are many other website companies around. Let me do my best to convince you to pick me...</p>
+                            
+                            <ul class="list-disc md:ml-10 ml-2 mt-12 md:text-lg text-sm text-customgreen pencilList opacity-0 duration-1000">
+                                <li class="mt-1 text-md">It is just me, Jack. Take comfort in knowing you won't have to dabble in large company issues.</li>
+                                <li class="mt-1 text-md">I always keeping up to date with the latest technologies.</li>
+                                <li class="mt-1 text-md">I am a perfectionist and will make sure your website is perfect.</li>
+                                <li class="mt-1 text-md">I am a very friendly and approachable person.</li>
+                                <li class="mt-1 text-md">I am very affordable and my prices are fair.</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </section>
-            
-            <section class="md:p-10 p-2 bg-black">
-                <h2 class="md:text-2xl text-lg font-semibold text-center duration-200 opacity-0 qualificationTitle">Why am I qualified to make you a website?</h2>
+                </section>
                 
-                <div class="flex flex-wrap gap-4 justify-center pt-10 duration-200 qualificationGrid">
-                    <div @click="qualificationClick(0)" class="w-[200px] gridItems grid-Item1">
-                        <div class="nav-Container">
-                            <h3 class="title">Experience</h3>
-                            
-                            <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
-                                <ul class="list-disc">
-                                    <li>4 years as a web developer</li>
-                                    <li>2 years as a freelancer</li>
-                                    <li>Third year cybersecurity undergraduate</li>
-                                </ul>
+                <section class="md:p-10 p-2 mt-28">
+                    <h2 class="md:text-2xl text-lg font-semibold text-center duration-200 opacity-0 qualificationTitle">Why am I qualified to make you a website?</h2>
+                    
+                    <div class="flex flex-wrap gap-4 justify-center pt-10 duration-200 qualificationGrid">
+                        <div @click="qualificationClick(0)" class="w-[200px] gridItems grid-Item1">
+                            <div class="nav-Container">
+                                <h3 class="title">Experience</h3>
+                                
+                                <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
+                                    <ul class="list-disc">
+                                        <li>4 years as a web developer</li>
+                                        <li>2 years as a freelancer</li>
+                                        <li>Third year cybersecurity undergraduate</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div @click="qualificationClick(1)" class="w-[350px] gridItems grid-Item2">
+                            <div class="nav-Container">
+                                <h3 class="title">Education</h3>
+                                
+                                <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
+                                    <ul class="list-disc">
+                                        <li>Third year cybersecurity undergraduate.</li>
+                                        <li>Passed with a first in both web developing modules.</li>
+                                        <li>Taught the university web developer module to the first years whilst studying as a student myself.</li>
+                                        <li>Completed a web developer internship.</li>
+                                        <li>Worked with large company projects and smaller personal projects.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div @click="qualificationClick(2)" class="w-[350px] gridItems grid-Item3">
+                            <div class="nav-Container">
+                                <h3 class="title">About</h3>
+                                
+                                <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
+                                    <ul class="list-disc">
+                                        <li>My name is Jack</li>
+                                        <li>I am 20 years old</li>
+                                        <li>Coding is my passion and I have spent the past 4 years building and perfecting my skills</li>
+                                        <li>I love music and guitar and studied at a music college for 2 years</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div @click="qualificationClick(3)" class="w-[300px] gridItems grid-Item4">
+                            <div class="nav-Container">
+                                <h3 class="title">Skills</h3>
+                                
+                                <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
+                                    <ul class="list-disc">
+                                        <li>HTML, CSS, JavaScript</li>
+                                        <li>Vue JS, Tailwind, SCSS</li>
+                                        <li>Responsive and interactive design</li>
+                                        <li>SEO and performance optimisation</li>
+                                        <li>Git and Github</li>
+                                        <li>Knowledge in colour theory</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div @click="qualificationClick(1)" class="w-[350px] gridItems grid-Item2">
-                        <div class="nav-Container">
-                            <h3 class="title">Education</h3>
-                            
-                            <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
-                                <ul class="list-disc">
-                                    <li>Third year cybersecurity undergraduate.</li>
-                                    <li>Passed with a first in both web developing modules.</li>
-                                    <li>Taught the university web developer module to the first years whilst studying as a student myself.</li>
-                                    <li>Completed a web developer internship.</li>
-                                    <li>Worked with large company projects and smaller personal projects.</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div @click="qualificationClick(2)" class="w-[350px] gridItems grid-Item3">
-                        <div class="nav-Container">
-                            <h3 class="title">About</h3>
-                            
-                            <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
-                                <ul class="list-disc">
-                                    <li>My name is Jack</li>
-                                    <li>I am 20 years old</li>
-                                    <li>Coding is my passion and I have spent the past 4 years building and perfecting my skills</li>
-                                    <li>I love music and guitar and studied at a music college for 2 years</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div @click="qualificationClick(3)" class="w-[300px] gridItems grid-Item4">
-                        <div class="nav-Container">
-                            <h3 class="title">Skills</h3>
-                            
-                            <div class="content font-[system-ui] text-xs hidden p-4 pl-8">
-                                <ul class="list-disc">
-                                    <li>HTML, CSS, JavaScript</li>
-                                    <li>Vue JS, Tailwind, SCSS</li>
-                                    <li>Responsive and interactive design</li>
-                                    <li>SEO and performance optimisation</li>
-                                    <li>Git and Github</li>
-                                    <li>Knowledge in colour theory</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </section>
             </section>
             
-            <section class="lg:scale-125 scale-100 lg:pb-20 max-w-[80%] mx-auto">
+            <section class="lg:scale-125 scale-100 lg:pb-20 lg:max-w-[50%] mx-auto">
                 <h2 class="md:text-2xl font-semibold mt-20 text-center md:px-10 text-md">How much will your website cost?</h2>
                 
                 <p class="mx-auto w-[85%] text-sm text-center opacity-70 mt-4">The big piece of information that everybody wants to know... how much will I have to spend?</p>
                 <p class="mx-auto w-[85%] text-sm text-center opacity-70">This is why I have a free consultation to give you a rough estimate of how much a website made by me will cost.</p>
                 <br>
                 
-                <p class="mx-auto w-[85%] text-sm text-center opacity-70">Usually a web developer would charge an hourly price, but how can you be sure they are being fair? That's why I will charge a total based on the content you would like. This makes it cheaper for you. Let's do the math:</p>
-                <ul class="mx-auto w-[85%] text-sm text-center opacity-70 list-disc">
-                    <li>Say a web developer charges £12/h and spends 2 weeks on a website, 4 hours a day. That would total £672, and that's before added fees.</li>
-                </ul>
+                <div class="flex items-center justify-center flex-col">
+                    <ul class="list-disc opacity-70">
+                        <li>Domain (average £9-£12 a year)</li>
+                        <li>My time (calculated based on website content)</li>
+                    </ul>
+                    
+                    <ul class="list-disc opacity-70 -ml-12 mt-2">
+                        <li>Type of website</li>
+                        <li>How long it will take me</li>
+                        <li>Complexity</li>
+                    </ul>
+                </div>
             </section>
             
-            <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center lg:scale-125 scale-100">
-                <h2 class="md:text-2xl font-semibold mt-20 text-center md:px-10 text-md">Get in contact with me to discuss further!</h2>
-                <p class="opacity-60 text-[10px] md:text-[12px] text-center md:px-10">Please drop me an email, I would love to hear from you! 
+            <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center">
+                <h2 class="md:text-[29px] font-bold mt-20 text-center md:px-10 text-md">Get in contact with me to discuss further!</h2>
+                <p class="opacity-60 text-[11px] md:text-[18px] text-center md:px-10 lg:pb-10 pb-0">Please drop me an email, I would love to hear from you!
                     <br>Ask any questions you like!
                 </p>
                 
-                <form class="md:w-1/2 w-full md:p-10 p-2 pt-6 font-[system-ui] text-sm pb-20 flex items-center flex-col" action="https://api.staticforms.xyz/submit" method="post">
+                <form class="md:w-[500px] w-full md:p-10 p-2 pt-6 font-[system-ui] text-sm pb-20 flex items-center flex-col 2xl:scale-125 scale-100" action="https://api.staticforms.xyz/submit" method="post">
                     <input class="text-white outline-none bg-[#9aaaad31] rounded pr-10 pl-2 py-1 shadow-customgreen" type="text" name="name" placeholder="Your Name">
                     <input class="text-white outline-none bg-[#9aaaad31] mt-2 rounded pr-10 pl-2 py-1 shadow-customgreen" type="text" name="email" placeholder="Your Email" />
                     <textarea placeholder="Hey there! I am interested in a website, how can we go about doing it? Thanks :)" class="text-white p-2 outline-none bg-[#9aaaad31] mt-6 resize-none w-[90%] h-24 rounded shadow-customgreen" name="message"></textarea>
@@ -364,7 +370,7 @@ onMounted(() => {
             </section>
         </main>
         
-        <footer class="bg-[#08985e40] flex items-center justify-center text-[#ffffffaa] font-[system-ui] text-xs gap-10 md:p-10 p-4 bg-black">
+        <footer class="bg-[#08985e40] flex items-center justify-center text-[#ffffffaa] font-[system-ui] text-xs gap-10 md:p-6 p-4 bg-black">
             <p>Copyright 2023 JacksWeb</p>
             <p>Icons by <a class="underline cursor-pointer" target="_blank" href="https://icons8.com">Icons8</a></p>
         </footer>
@@ -372,173 +378,188 @@ onMounted(() => {
 </template>
 
 <style lang="postcss">
-@font-face {
-    font-family: 'Exo 2';
-    src: url('../assets/fonts/exo2.ttf');
-    font-weight: 500;
-}
-
-@font-face {
-    font-family: 'Cabin Sketch';
-    src: url('../assets/fonts/cabinsketch.ttf');
-    font-weight: 500;
-}
-
-html {
-    scroll-behavior: smooth;
+    @font-face {
+        font-family: 'Exo 2';
+        src: url('../assets/fonts/exo2.ttf');
+        font-weight: 500;
+    }
     
-    #app {
-        font-family: 'Exo 2', sans-serif;
+    @font-face {
+        font-family: 'Cabin Sketch';
+        src: url('../assets/fonts/cabinsketch.ttf');
+        font-weight: 500;
+    }
+    
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+        background-color: #1d1d1d;
+    }
+    ::-webkit-scrollbar-thumb {
+        background-color: #4b5563;
+        border-radius: 10px;
+    }
+    
+    html {
+        scroll-behavior: smooth;
         
-        .informationtext {
-            @apply text-sm mt-3 opacity-60;
-        }
-        
-        .header {
-            background-image: url('../assets/images/women.jpg');
-            background-repeat: no-repeat;
-            height: 100%;
-            background-size: cover;
+        #app {
+            font-family: 'Exo 2', sans-serif;
             
-            @media (max-width: 767px) {
-                background-image: url('../assets/images/women-short.jpg');
+            .informationtext {
+                @apply text-sm mt-3 opacity-60;
             }
             
-            .headerWords {
-                @apply underline text-customgreen;
-            }
-            
-            .startButtons {
-                @apply inline-block pr-4 cursor-pointer pl-3 text-left rounded-md mt-4 shadow-2xl font-[system-ui] text-sm duration-200 bg-customgreen hover:bg-customgreen/50;
-            }
-            
-            .section1 {
-                
-                .grid-Container {
-                    grid-template-rows: repeat(7, 1fr);
-                    backdrop-filter: blur(10px);
-                    
-                    &::-webkit-scrollbar {
-                        width: 10px;
-                    }
-                    &::-webkit-scrollbar-track {
-                        background-color: #1a2026;
-                    }
-                    &::-webkit-scrollbar-thumb {
-                        background-color: #4b5563;
-                        border-radius: 10px;
-                    }
-                    
-                    .gridItem {
-                        .gridImage {
-                            @apply rounded w-4 h-4 inline-block;
-                        }
-                        .subtitle {
-                            @apply inline-block text-xs ml-1;
-                        }
-                        .title {
-                            @apply text-2xl font-semibold mt-2 font-[system-ui];
-                        }
-                        .text {
-                            @apply font-[system-ui] text-xs mt-4 opacity-60 w-[250px];
-                        }
-                    }
-                }
-                
-                .slidesContainer {
-                    @media (min-width: 767px) {
-                        &:hover .slide {
-                            animation: expandSlides 0.3s ease-in-out forwards;
-                        }
-                    }
-                    
-                    @media (min-width: 767px) {
-                        &:not(:hover) .slide {
-                            animation: shrinkSlides 0.3s ease-in-out forwards;
-                        }
-                    }
-                    
-                    .slide {
-                        @apply bg-gray-600/50 md:rounded-xl rounded md:-mt-6 md:h-14 h-10 pr-2 md:pr-0 max-h-14 duration-200 cursor-pointer flex items-center backdrop-blur-sm;
-                        
-                        &:hover {
-                            @apply scale-105;
-                        }
-                        
-                        .slideimage {
-                            @apply p-2 lg:w-14 md:w-12 w-10 md:rounded-2xl rounded-xl;
-                        }
-                        
-                        h2 {
-                            @apply text-xs lg:text-base;
-                        }
-                    }
-                }
-            }
-        }
-        
-        .section2 {
-            font-family: 'Cabin Sketch';
-            background: linear-gradient(to bottom, #0a0d0d, black);
-        }
-        
-        .contactSection {
-            background: linear-gradient(to top, #08985e40, black 80%);
-        }
-        
-        .qualificationGrid {          
-            .gridItems {
+            .header {
+                background-image: url('../assets/images/women.jpg');
+                background-repeat: no-repeat;
+                height: 100%;
                 background-size: cover;
-                background-position: center;
-                @apply cursor-pointer h-[100px] rounded duration-200 opacity-0;
                 
-                .nav-Container {
-                    @apply w-full flex items-center justify-center h-full duration-200 bg-[#222925aa] backdrop-blur-sm rounded-t-sm;
+                @media (max-width: 767px) {
+                    background-image: url('../assets/images/women-short.jpg');
+                }
+                
+                .headerWords {
+                    @apply underline text-customgreen;
+                }
+                
+                .startButtons {
+                    @apply inline-block pr-4 cursor-pointer pl-3 text-left rounded-md mt-4 shadow-2xl font-[system-ui] text-sm duration-200 bg-customgreen hover:bg-customgreen/50;
+                }
+                
+                .section1 {
                     
-                    .title {
-                        @apply text-sm bg-[#111111aa] p-2 rounded-md font-[system-ui] text-[#ffffffaa] duration-200;
+                    .grid-Container {
+                        grid-template-rows: repeat(7, 1fr);
+                        backdrop-filter: blur(10px);
+                        
+                        &::-webkit-scrollbar {
+                            width: 10px;
+                        }
+                        &::-webkit-scrollbar-track {
+                            background-color: #1a2026;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                            background-color: #4b5563;
+                            border-radius: 10px;
+                        }
+                        
+                        .gridItem {
+                            .gridImage {
+                                @apply rounded w-4 h-4 inline-block;
+                            }
+                            .subtitle {
+                                @apply inline-block text-xs ml-1;
+                            }
+                            .title {
+                                @apply text-2xl font-semibold mt-2 font-[system-ui];
+                            }
+                            .text {
+                                @apply font-[system-ui] text-xs mt-4 opacity-60 w-[250px];
+                            }
+                        }
+                    }
+                    
+                    .slidesContainer {
+                        @media (min-width: 767px) {
+                            &:hover .slide {
+                                animation: expandSlides 0.3s ease-in-out forwards;
+                            }
+                        }
+                        
+                        @media (min-width: 767px) {
+                            &:not(:hover) .slide {
+                                animation: shrinkSlides 0.3s ease-in-out forwards;
+                            }
+                        }
+                        
+                        .slide {
+                            @apply bg-gray-600/50 md:rounded-xl rounded md:-mt-6 md:h-14 h-10 pr-2 md:pr-0 max-h-14 duration-200 cursor-pointer flex items-center backdrop-blur-sm;
+                            
+                            &:hover {
+                                @apply scale-105;
+                            }
+                            
+                            .slideimage {
+                                @apply p-2 lg:w-14 md:w-12 w-10 md:rounded-2xl rounded-xl;
+                            }
+                            
+                            h2 {
+                                @apply text-xs lg:text-base;
+                            }
+                        }
                     }
                 }
-                
-                &:hover .title {
-                    @apply text-xs bg-transparent p-0;
+            }
+            
+            .twoGridSection {
+                background: linear-gradient(to bottom, #0a0d0d, black);
+            }
+            
+            .section2 {
+                font-family: 'Cabin Sketch';
+                /* background: linear-gradient(to bottom, #0a0d0d, black); */
+            }
+            
+            .contactSection {
+                background: linear-gradient(to top, #08985e40, black 80%);
+            }
+            
+            .qualificationGrid {          
+                .gridItems {
+                    background-size: cover;
+                    background-position: center;
+                    @apply cursor-pointer h-[100px] rounded duration-200 opacity-0;
+                    
+                    .nav-Container {
+                        @apply w-full flex items-center justify-center h-full duration-200 bg-[#222925aa] backdrop-blur-sm rounded-t-sm;
+                        
+                        .title {
+                            @apply text-sm bg-[#111111aa] p-2 rounded-md font-[system-ui] text-[#ffffffaa] duration-200;
+                        }
+                    }
+                    
+                    &:hover .title {
+                        @apply text-xs bg-transparent p-0;
+                    }
+                }
+                .grid-Item1 {
+                    background-image: url('../assets/images/experience.jpg');
+                }
+                .grid-Item2 {
+                    background-image: url('../assets/images/education.jpg');
+                }
+                .grid-Item3 {
+                    background-image: url('../assets/images/about.jpg');
+                }
+                .grid-Item4 {
+                    background-image: url('../assets/images/skills.jpg');
                 }
             }
-            .grid-Item1 {
-                background-image: url('../assets/images/experience.jpg');
-            }
-            .grid-Item2 {
-                background-image: url('../assets/images/education.jpg');
-            }
-            .grid-Item3 {
-                background-image: url('../assets/images/about.jpg');
-            }
-            .grid-Item4 {
-                background-image: url('../assets/images/skills.jpg');
-            }
+        }    
+    }
+    
+    @keyframes expandSlides {
+        0% {
+            margin-top: -24px;
         }
-    }    
-}
-
-@keyframes expandSlides {
-    0% {
-        margin-top: -24px;
+        
+        100% {
+            margin-top: 8px;
+        }
     }
     
-    100% {
-        margin-top: 8px;
+    @keyframes shrinkSlides {
+        0% {
+            margin-top: 8px;
+        }
+        
+        100% {
+            margin-top: -24px;
+        }
     }
-}
-
-@keyframes shrinkSlides {
-    0% {
-        margin-top: 8px;
-    }
-    
-    100% {
-        margin-top: -24px;
-    }
-}
 </style>
 
 
