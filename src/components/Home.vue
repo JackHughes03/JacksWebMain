@@ -1,88 +1,88 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
-    const selectedSlideIndex = ref(0),
-    showAbout = ref(false);
+import { ref, onMounted } from 'vue';
+const selectedSlideIndex = ref(0),
+showAbout = ref(false);
+
+const isElementInViewport = (element) => {
+    const rect = element.getBoundingClientRect();
+    return (
+    rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+};
+
+const handleScroll = () => {
+    const pencilImage = document.querySelector('.pencilImage'),
+    pencilTitle = document.querySelector('.pencilTitle'),
+    pencilSubTitle = document.querySelector('.pencilSubTitle'),
+    pencilList = document.querySelector('.pencilList'),
+    qualificationGrid = document.querySelector('.qualificationGrid'),
+    gridItems = document.querySelectorAll('.gridItems'),
+    qualificationTitle = document.querySelector('.qualificationTitle'),
+    elementsToAnimate = [pencilImage, pencilTitle, pencilSubTitle, pencilList];
     
-    const isElementInViewport = (element) => {
-        const rect = element.getBoundingClientRect();
-        return (
-        rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    };
-    
-    const handleScroll = () => {
-        const pencilImage = document.querySelector('.pencilImage'),
-        pencilTitle = document.querySelector('.pencilTitle'),
-        pencilSubTitle = document.querySelector('.pencilSubTitle'),
-        pencilList = document.querySelector('.pencilList'),
-        qualificationGrid = document.querySelector('.qualificationGrid'),
-        gridItems = document.querySelectorAll('.gridItems'),
-        qualificationTitle = document.querySelector('.qualificationTitle'),
-        elementsToAnimate = [pencilImage, pencilTitle, pencilSubTitle, pencilList];
-        
-        elementsToAnimate.forEach((element) => {
-            if (isElementInViewport(element)) {
-                element.classList.replace('opacity-0', 'opacity-100');
-            }
-        });
-        
-        if (isElementInViewport(qualificationGrid)) {
-            qualificationTitle.classList.replace('opacity-0', 'opacity-100');
-            
-            gridItems.forEach((item, i) => setTimeout(() => {
-                item.style.opacity = '1';
-                item.style.transition = 'opacity 0.5s';
-            }, i * 100));
+    elementsToAnimate.forEach((element) => {
+        if (isElementInViewport(element)) {
+            element.classList.replace('opacity-0', 'opacity-100');
         }
-    }
-    
-    const slidesClick = (index) => {
-        const slideToScroll = document.querySelector(`.slidecontent${index}`),
-        gridContainer = document.querySelector('.grid-Container');
-        
-        selectedSlideIndex.value = index;
-        
-        gridContainer.scrollTo({
-            top: slideToScroll.offsetTop - 10,
-            behavior: 'smooth'
-        });
-    }
-    
-    const qualificationClick = (index) => {
-        const griditems = document.querySelectorAll('.gridItems');
-        
-        griditems.forEach((item, i) => {
-            const title = item.querySelector('.title'),
-            content = item.querySelector('.content');
-            
-            if (i === index) {
-                item.style.opacity = '1';
-                item.style.height = 'unset';
-                title.style.display = 'none';
-                content.style.display = 'block';
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', () => {
-        const nav = document.querySelector('nav'),
-        navButtons = document.querySelector('.navButtons');
-        
-        window.scrollY > 1 ? ( navButtons.classList.replace('gap-8', 'gap-2'), navButtons.classList.replace('mr-12', 'mr-6'), nav.classList.add('bg-[#111111bc]')) : ( navButtons.classList.replace('gap-2', 'gap-8'), navButtons.classList.replace('mr-6', 'mr-12'), nav.classList.remove('bg-[#111111bc]'));
     });
     
-    onMounted(() => {
-        const slides = document.querySelectorAll('.slide'),
-        slidecontent = document.querySelectorAll('.gridItem');
+    if (isElementInViewport(qualificationGrid)) {
+        qualificationTitle.classList.replace('opacity-0', 'opacity-100');
         
-        slides.forEach((slide, i) => {
-            slidecontent[i].classList.add(`slidecontent${i}`);
-        });
-        
-        window.addEventListener("scroll", handleScroll);
-        
-        handleScroll();
+        gridItems.forEach((item, i) => setTimeout(() => {
+            item.style.opacity = '1';
+            item.style.transition = 'opacity 0.5s';
+        }, i * 100));
+    }
+}
+
+const slidesClick = (index) => {
+    const slideToScroll = document.querySelector(`.slidecontent${index}`),
+    gridContainer = document.querySelector('.grid-Container');
+    
+    selectedSlideIndex.value = index;
+    
+    gridContainer.scrollTo({
+        top: slideToScroll.offsetTop - 10,
+        behavior: 'smooth'
     });
+}
+
+const qualificationClick = (index) => {
+    const griditems = document.querySelectorAll('.gridItems');
+    
+    griditems.forEach((item, i) => {
+        const title = item.querySelector('.title'),
+        content = item.querySelector('.content');
+        
+        if (i === index) {
+            item.style.opacity = '1';
+            item.style.height = 'unset';
+            title.style.display = 'none';
+            content.style.display = 'block';
+        }
+    });
+}
+
+window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav'),
+    navButtons = document.querySelector('.navButtons');
+    
+    window.scrollY > 1 ? ( navButtons.classList.replace('gap-8', 'gap-2'), navButtons.classList.replace('mr-12', 'mr-6'), nav.classList.add('bg-[#111111bc]')) : ( navButtons.classList.replace('gap-2', 'gap-8'), navButtons.classList.replace('mr-6', 'mr-12'), nav.classList.remove('bg-[#111111bc]'));
+});
+
+onMounted(() => {
+    const slides = document.querySelectorAll('.slide'),
+    slidecontent = document.querySelectorAll('.gridItem');
+    
+    slides.forEach((slide, i) => {
+        slidecontent[i].classList.add(`slidecontent${i}`);
+    });
+    
+    window.addEventListener("scroll", handleScroll);
+    
+    handleScroll();
+});
 </script>
 
 <template>
@@ -350,6 +350,7 @@
                 </div>
             </section>
             
+            
             <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center">
                 <h2 class="md:text-[29px] font-bold mt-20 text-center md:px-10 text-md">Get in contact with me to discuss further!</h2>
                 <p class="opacity-60 text-[11px] md:text-[18px] text-center md:px-10 lg:pb-10 pb-0">Please drop me an email, I would love to hear from you!
@@ -378,188 +379,188 @@
 </template>
 
 <style lang="postcss">
-    @font-face {
-        font-family: 'Exo 2';
-        src: url('../assets/fonts/exo2.ttf');
-        font-weight: 500;
-    }
+@font-face {
+    font-family: 'Exo 2';
+    src: url('../assets/fonts/exo2.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Cabin Sketch';
+    src: url('../assets/fonts/cabinsketch.ttf');
+    font-weight: 500;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: #1d1d1d;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 10px;
+}
+
+html {
+    scroll-behavior: smooth;
     
-    @font-face {
-        font-family: 'Cabin Sketch';
-        src: url('../assets/fonts/cabinsketch.ttf');
-        font-weight: 500;
-    }
-    
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-        background-color: #1d1d1d;
-    }
-    ::-webkit-scrollbar-thumb {
-        background-color: #4b5563;
-        border-radius: 10px;
-    }
-    
-    html {
-        scroll-behavior: smooth;
+    #app {
+        font-family: 'Exo 2', sans-serif;
         
-        #app {
-            font-family: 'Exo 2', sans-serif;
+        .informationtext {
+            @apply text-sm mt-3 opacity-60;
+        }
+        
+        .header {
+            background-image: url('../assets/images/women.jpg');
+            background-repeat: no-repeat;
+            height: 100%;
+            background-size: cover;
             
-            .informationtext {
-                @apply text-sm mt-3 opacity-60;
+            @media (max-width: 767px) {
+                background-image: url('../assets/images/women-short.jpg');
             }
             
-            .header {
-                background-image: url('../assets/images/women.jpg');
-                background-repeat: no-repeat;
-                height: 100%;
-                background-size: cover;
+            .headerWords {
+                @apply underline text-customgreen;
+            }
+            
+            .startButtons {
+                @apply inline-block pr-4 cursor-pointer pl-3 text-left rounded-md mt-4 shadow-2xl font-[system-ui] text-sm duration-200 bg-customgreen hover:bg-customgreen/50;
+            }
+            
+            .section1 {
                 
-                @media (max-width: 767px) {
-                    background-image: url('../assets/images/women-short.jpg');
-                }
-                
-                .headerWords {
-                    @apply underline text-customgreen;
-                }
-                
-                .startButtons {
-                    @apply inline-block pr-4 cursor-pointer pl-3 text-left rounded-md mt-4 shadow-2xl font-[system-ui] text-sm duration-200 bg-customgreen hover:bg-customgreen/50;
-                }
-                
-                .section1 {
+                .grid-Container {
+                    grid-template-rows: repeat(7, 1fr);
+                    backdrop-filter: blur(10px);
                     
-                    .grid-Container {
-                        grid-template-rows: repeat(7, 1fr);
-                        backdrop-filter: blur(10px);
-                        
-                        &::-webkit-scrollbar {
-                            width: 10px;
-                        }
-                        &::-webkit-scrollbar-track {
-                            background-color: #1a2026;
-                        }
-                        &::-webkit-scrollbar-thumb {
-                            background-color: #4b5563;
-                            border-radius: 10px;
-                        }
-                        
-                        .gridItem {
-                            .gridImage {
-                                @apply rounded w-4 h-4 inline-block;
-                            }
-                            .subtitle {
-                                @apply inline-block text-xs ml-1;
-                            }
-                            .title {
-                                @apply text-2xl font-semibold mt-2 font-[system-ui];
-                            }
-                            .text {
-                                @apply font-[system-ui] text-xs mt-4 opacity-60 w-[250px];
-                            }
-                        }
+                    &::-webkit-scrollbar {
+                        width: 10px;
+                    }
+                    &::-webkit-scrollbar-track {
+                        background-color: #1a2026;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                        background-color: #4b5563;
+                        border-radius: 10px;
                     }
                     
-                    .slidesContainer {
-                        @media (min-width: 767px) {
-                            &:hover .slide {
-                                animation: expandSlides 0.3s ease-in-out forwards;
-                            }
+                    .gridItem {
+                        .gridImage {
+                            @apply rounded w-4 h-4 inline-block;
                         }
-                        
-                        @media (min-width: 767px) {
-                            &:not(:hover) .slide {
-                                animation: shrinkSlides 0.3s ease-in-out forwards;
-                            }
+                        .subtitle {
+                            @apply inline-block text-xs ml-1;
                         }
-                        
-                        .slide {
-                            @apply bg-gray-600/50 md:rounded-xl rounded md:-mt-6 md:h-14 h-10 pr-2 md:pr-0 max-h-14 duration-200 cursor-pointer flex items-center backdrop-blur-sm;
-                            
-                            &:hover {
-                                @apply scale-105;
-                            }
-                            
-                            .slideimage {
-                                @apply p-2 lg:w-14 md:w-12 w-10 md:rounded-2xl rounded-xl;
-                            }
-                            
-                            h2 {
-                                @apply text-xs lg:text-base;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            .twoGridSection {
-                background: linear-gradient(to bottom, #0a0d0d, black);
-            }
-            
-            .section2 {
-                font-family: 'Cabin Sketch';
-                /* background: linear-gradient(to bottom, #0a0d0d, black); */
-            }
-            
-            .contactSection {
-                background: linear-gradient(to top, #08985e40, black 80%);
-            }
-            
-            .qualificationGrid {          
-                .gridItems {
-                    background-size: cover;
-                    background-position: center;
-                    @apply cursor-pointer h-[100px] rounded duration-200 opacity-0;
-                    
-                    .nav-Container {
-                        @apply w-full flex items-center justify-center h-full duration-200 bg-[#222925aa] backdrop-blur-sm rounded-t-sm;
-                        
                         .title {
-                            @apply text-sm bg-[#111111aa] p-2 rounded-md font-[system-ui] text-[#ffffffaa] duration-200;
+                            @apply text-2xl font-semibold mt-2 font-[system-ui];
+                        }
+                        .text {
+                            @apply font-[system-ui] text-xs mt-4 opacity-60 w-[250px];
+                        }
+                    }
+                }
+                
+                .slidesContainer {
+                    @media (min-width: 767px) {
+                        &:hover .slide {
+                            animation: expandSlides 0.3s ease-in-out forwards;
                         }
                     }
                     
-                    &:hover .title {
-                        @apply text-xs bg-transparent p-0;
+                    @media (min-width: 767px) {
+                        &:not(:hover) .slide {
+                            animation: shrinkSlides 0.3s ease-in-out forwards;
+                        }
+                    }
+                    
+                    .slide {
+                        @apply bg-gray-600/50 md:rounded-xl rounded md:-mt-6 md:h-14 h-10 pr-2 md:pr-0 max-h-14 duration-200 cursor-pointer flex items-center backdrop-blur-sm;
+                        
+                        &:hover {
+                            @apply scale-105;
+                        }
+                        
+                        .slideimage {
+                            @apply p-2 lg:w-14 md:w-12 w-10 md:rounded-2xl rounded-xl;
+                        }
+                        
+                        h2 {
+                            @apply text-xs lg:text-base;
+                        }
                     }
                 }
-                .grid-Item1 {
-                    background-image: url('../assets/images/experience.jpg');
+            }
+        }
+        
+        .twoGridSection {
+            background: linear-gradient(to bottom, #0a0d0d, black);
+        }
+        
+        .section2 {
+            font-family: 'Cabin Sketch';
+            /* background: linear-gradient(to bottom, #0a0d0d, black); */
+        }
+        
+        .contactSection {
+            background: linear-gradient(to top, #08985e40, black 80%);
+        }
+        
+        .qualificationGrid {          
+            .gridItems {
+                background-size: cover;
+                background-position: center;
+                @apply cursor-pointer h-[100px] rounded duration-200 opacity-0;
+                
+                .nav-Container {
+                    @apply w-full flex items-center justify-center h-full duration-200 bg-[#222925aa] backdrop-blur-sm rounded-t-sm;
+                    
+                    .title {
+                        @apply text-sm bg-[#111111aa] p-2 rounded-md font-[system-ui] text-[#ffffffaa] duration-200;
+                    }
                 }
-                .grid-Item2 {
-                    background-image: url('../assets/images/education.jpg');
-                }
-                .grid-Item3 {
-                    background-image: url('../assets/images/about.jpg');
-                }
-                .grid-Item4 {
-                    background-image: url('../assets/images/skills.jpg');
+                
+                &:hover .title {
+                    @apply text-xs bg-transparent p-0;
                 }
             }
-        }    
+            .grid-Item1 {
+                background-image: url('../assets/images/experience.jpg');
+            }
+            .grid-Item2 {
+                background-image: url('../assets/images/education.jpg');
+            }
+            .grid-Item3 {
+                background-image: url('../assets/images/about.jpg');
+            }
+            .grid-Item4 {
+                background-image: url('../assets/images/skills.jpg');
+            }
+        }
+    }    
+}
+
+@keyframes expandSlides {
+    0% {
+        margin-top: -24px;
     }
     
-    @keyframes expandSlides {
-        0% {
-            margin-top: -24px;
-        }
-        
-        100% {
-            margin-top: 8px;
-        }
+    100% {
+        margin-top: 8px;
+    }
+}
+
+@keyframes shrinkSlides {
+    0% {
+        margin-top: 8px;
     }
     
-    @keyframes shrinkSlides {
-        0% {
-            margin-top: 8px;
-        }
-        
-        100% {
-            margin-top: -24px;
-        }
+    100% {
+        margin-top: -24px;
     }
+}
 </style>
 
 
@@ -587,4 +588,6 @@
     
     - add in pricing section
     - allow sections to be clicked back to normal
+    - add in my portfolio section
+    - add in meta data
 -->
