@@ -350,6 +350,20 @@ onMounted(() => {
                 </div>
             </section>
             
+            <section class="p-20 pt-0">
+                <h2 class="md:text-[29px] font-bold mt-20 text-center md:px-10 text-md p-10">See my work</h2>
+
+                <section class="flex flex-wrap justify-center gap-4">
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                    <div class="w-[200px] h-[300px] border-2 rounded-lg"></div>
+                </section>
+            </section>
             
             <section id="ScrollToContact" class="font-[system-ui] contactSection flex flex-col items-center">
                 <h2 class="md:text-[29px] font-bold mt-20 text-center md:px-10 text-md">Get in contact with me to discuss further!</h2>
